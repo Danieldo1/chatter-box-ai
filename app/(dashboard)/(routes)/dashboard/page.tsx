@@ -1,9 +1,11 @@
+import { UserButton } from "@clerk/nextjs";
 
 
 export default function Dashboard() {
   return (
-    <main className="">
+    <div className="">
      <p className="text-xl text-red-500">Hello</p>
-    </main>
+     <UserButton afterSignOutUrl="/" />
+    </div>
   )
 }
