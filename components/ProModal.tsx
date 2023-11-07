@@ -7,6 +7,8 @@ import {  Bot, ImageIcon, Code, Music,VideoIcon,Check,ZapIcon } from "lucide-rea
 import { Card } from "./ui/card"
 import { cn } from "@/lib/utils"
 import { Button } from "./ui/button"
+import axios from "axios"
+import {useState} from "react"
 
 
 
@@ -48,7 +50,24 @@ const tools = [
   ]
 
 const ProModal = () => {
+
+    const [loading, setLoading] = useState(false)
     const proModal = useProModal()
+
+    const onSubscribe = async () => {
+      try {
+        setLoading(true)
+        const response = await axios.get('/api/stripe')
+        window.location.href = response.data.url
+      } catch (error) {
+        console.log(error,"STRIPE_CLIENT_ERROR")
+      } finally {
+        setLoading(false)
+      }
+
+
+
+    }
   return (
    <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
     <DialogContent>
@@ -83,7 +102,9 @@ const ProModal = () => {
         </DialogHeader>
 
         <DialogFooter>
-            <Button size={"lg"} className="w-full relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-[#000000] rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200  focus:ring-2 focus:outline-none focus:ring-red-100 ">
+            <Button size={"lg"} className="w-full relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-[#000000] rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200  focus:ring-2 focus:outline-none focus:ring-red-100 "
+            onClick={onSubscribe}
+            >
                 
                 <ZapIcon className="w-5 h-5 mr-2 fill-black group-hover:fill-[#ffffff] group-hover:text-white " />
                 <span className="relative px-0 py-2.5 transition-all ease-in duration-150 bg-transparent rounded-md group-hover:bg-opacity-0 group-hover:text-white">
