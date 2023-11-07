@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 import OpenAI from 'openai';
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { increaseApiLimit,checkApiLimit } from '@/lib/api-limit';
+import { checkSubscription } from '@/lib/subscription';
 
 
 const openai = new OpenAI({
@@ -35,8 +36,9 @@ try {
     }
 
     const freeTrial = await checkApiLimit();
+    const isPro = await checkSubscription();
 
-    if(!freeTrial){
+    if(!freeTrial && !isPro){
         return new NextResponse('Please upgrade your account', { status: 403 })
     }
 
@@ -48,7 +50,9 @@ try {
         ]
     })
     
-    await increaseApiLimit();
+    if(!isPro){
+        await increaseApiLimit();
+    }
 
     return NextResponse.json(response.choices[0].message)
 } catch (error) {
