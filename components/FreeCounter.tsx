@@ -6,6 +6,7 @@ import { MAX_FREE_COUNTS } from "@/constants"
 import { Progress } from "./ui/progress"
 import { Button } from "./ui/button"
 import { ZapIcon } from "lucide-react"
+import { useProModal } from "@/hooks/UseProModal"
 
 interface FreeCounterProps {
     apiLimitCount: number
@@ -13,6 +14,7 @@ interface FreeCounterProps {
 
 const FreeCounter = ({apiLimitCount = 0}: FreeCounterProps) => {
 
+    const proModel = useProModal()
     const [mounted,setMounted] = useState(false)
 
     useEffect(() => {
@@ -38,9 +40,12 @@ const FreeCounter = ({apiLimitCount = 0}: FreeCounterProps) => {
                     />
                 </div>
 
-                <Button className="w-full relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-[#000000] rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200  focus:ring-2 focus:outline-none focus:ring-red-100 ">
+                <Button 
+                className="w-full relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-[#000000] rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200  focus:ring-2 focus:outline-none focus:ring-red-100 "
+                onClick={() => proModel.onOpen()}
+                >
                 
-                    <ZapIcon className="w-5 h-5 mr-2 fill-black group-hover:fill-[#000] " />
+                    <ZapIcon className="w-5 h-5 mr-2 fill-black group-hover:fill-[#ffffff] group-hover:text-white " />
                     <span className="relative px-0 py-2.5 transition-all ease-in duration-150 bg-transparent rounded-md group-hover:bg-opacity-0 group-hover:text-white">
                     Become Pro
                     </span>
