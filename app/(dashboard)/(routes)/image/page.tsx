@@ -20,9 +20,11 @@ import Image from 'next/image';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardFooter } from '@/components/ui/card';
+import { useProModal } from '@/hooks/UseProModal';
 
 
 const ImagePage = () => {
+    const proModal=useProModal()
     const [placeholder, setPlaceholder] = useState('');
     const [images,setImages] = useState<string[]>([]);
     const router = useRouter();
@@ -70,8 +72,9 @@ const ImagePage = () => {
         form.reset()
 
         } catch (error:any) {
-            //OPEN PRO MODEL
-            console.log(error)
+            if(error?.response?.status === 403){
+                proModal.onOpen()
+            }
         } finally{
             router.refresh()
         }

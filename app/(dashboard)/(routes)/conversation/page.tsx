@@ -19,9 +19,11 @@ import Loader from '@/components/Loader';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/UserAvatar';
 import { BotAvatar } from '@/components/BotAvatar';
+import { useProModal } from '@/hooks/UseProModal';
 
 
 const Conversion = () => {
+    const proModal=useProModal()
     const [placeholder, setPlaceholder] = useState('');
     const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
     const router = useRouter();
@@ -80,8 +82,10 @@ const Conversion = () => {
         form.reset()
 
         } catch (error:any) {
-            //OPEN PRO MODEL
-            console.log(error)
+            
+        if(error?.response?.status === 403){
+            proModal.onOpen()
+        }
         } finally{
             router.refresh()
         }
