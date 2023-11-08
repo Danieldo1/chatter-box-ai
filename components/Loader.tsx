@@ -75,10 +75,12 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useMemo } from 'react';
 
 function Loader() {
   const [currentMessage, setCurrentMessage] = useState('');
-  const messages = [
+
+  const messages = useMemo(() => [
     "ChatterBox is wondering 🤔",
     "ChatterBox is excited to help 😃",
     "ChatterBox is pondering 🤨",
@@ -98,10 +100,9 @@ function Loader() {
     "ChatterBox is on a knowledge quest 📚",
     "ChatterBox is in debugging mode 🐞",
     "ChatterBox is designing the future 🌟",
-  ];
+  ], []);
 
   useEffect(() => {
-    // Set initial message
     const randomIndex = Math.floor(Math.random() * messages.length);
     setCurrentMessage(messages[randomIndex]);
 
@@ -113,7 +114,7 @@ function Loader() {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [messages]);
 
   return (
     <div className="h-full gap-y-4 flex flex-col items-center justify-center">
