@@ -34,7 +34,7 @@ const LandingNav = () => {
                 >
 
                 <PencilLine className='w-5 h-5 mr-1'/>
-                    Get Started
+                {isSignedIn ? "Dashboard" : "Get Started"}
                 </Button>
             </Link>
         </div>
