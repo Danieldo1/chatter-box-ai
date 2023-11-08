@@ -3,7 +3,7 @@ import { Montserrat } from "next/font/google"
 import Link from "next/link"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
-import { LayoutDashboard, Bot, ImageIcon, VideoIcon, Music, Code, UserCog } from "lucide-react"
+import { LayoutDashboard, Bot, ImageIcon, VideoIcon, Music, Code, UserCog, User2, Frown } from "lucide-react"
 import { usePathname } from "next/navigation"
 import FreeCounter from "./FreeCounter"
 
@@ -21,6 +21,12 @@ const routes = [
         icon: Bot,
         href: "/conversation",
         color: 'text-violet-500',
+    },
+    {
+        label: "Mean Assistant",
+        icon: Frown,
+        href: "/person",
+        color: 'text-yellow-700',
     },
     {
         label: "Image Generator",
@@ -45,6 +51,7 @@ const routes = [
         href: "/code",
         color: 'text-green-700',
     },
+   
     {
         label: "Settings",
         icon: UserCog,

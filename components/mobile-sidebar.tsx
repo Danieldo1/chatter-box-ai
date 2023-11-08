@@ -21,10 +21,11 @@ const MobileSidebar = ({
         setIsMounted(true)
     }, [])
     if(!isMounted) return null
+   
   return (
 <Sheet>
     <SheetTrigger>
-        <Button variant={'ghost'} size={'icon'} className="md:hidden">
+        <Button variant={'ghost'} size={'icon'} className="md:hidden" >
             <Menu />
         </Button>
     </SheetTrigger>

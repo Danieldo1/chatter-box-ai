@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { ArrowRight, Bot, ImageIcon, Code, Music,VideoIcon } from "lucide-react"
+import { ArrowRight, Bot, ImageIcon, Code, Music,VideoIcon,Frown } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 const tools = [
@@ -13,6 +13,13 @@ const tools = [
     bgColor: 'bg-violet-500/10',
     href: '/conversation'
   },
+  {
+    label: "Mean Assistant",
+    icon: Frown,
+    color: 'text-yellow-700',
+    bgColor: 'bg-yellow-500/10',
+    href: '/person'
+},
   {
     label: 'Music Generation',
     icon: Music,
